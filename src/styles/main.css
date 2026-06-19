@@ -196,6 +196,62 @@ body {
   color: #ffffff;
   padding: 1.5rem;
 }
+/* Dark background overlay masking the page */
+.product-modal {
+  display: none; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+}
+/* Centered popup card layout */
+.product-modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 30px;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+/* Split image and info into a clean layout grid */
+.modal-body {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.modal-img {
+  width: 45%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.modal-info {
+  width: 55%;
+}
+
+.modal-price {
+  font-weight: bold;
+  color: #e44d26;
+  font-size: 1.2rem;
+}
+/* Close button style pointer */
+.close-popup-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #aaa;
+}
+.close-popup-btn:hover {
+  color: #000;
+}
 
 @media (max-width: 768px) {
   .hero-container {

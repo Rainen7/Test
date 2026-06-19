@@ -77,6 +77,30 @@ body {
   color: #00adb5;
 }
 
+.navbar ul, 
+.navbar li, 
+.nav-auth {
+  list-style: none !important;
+  list-style-type: none !important;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar a, 
+.nav-links a, 
+.nav-auth a,
+.btn-login, 
+.btn-register {
+  text-decoration: none !important;
+}
+
+.nav-auth {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 20px;
+}
+
 /* Hero Section Layout */
 .hero {
   min-height: 90vh; /* Scalable vertical height that respects varying dynamic content */

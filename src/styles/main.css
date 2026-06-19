@@ -121,7 +121,14 @@ body {
   background-color: rgba(0, 102, 204, 0.1);
 }
 
-/* Responsive Rules for Tablet and Mobile Screens */
+.footer {
+  text-align: center;
+  font-size: 0.95rem;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 1.5rem;
+}
+
 @media (max-width: 768px) {
   .hero-container {
     flex-direction: column;

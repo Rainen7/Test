@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrepLearn - Our Products</title>
+  <style>
+    /* --- Base Styling --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* --- Navbar --- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      padding: 15px 5%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .nav-logo a {
+      font-size: 24px;
+      font-weight: bold;
+      color: #007bff;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #555;
+      font-weight: 500;
+    }
+    .btn-login, .btn-register {
+      padding: 8px 16px;
+      border-radius: 4px;
+    }
+    .btn-login {
+      border: 1px solid #007bff;
+      color: #007bff !important;
+    }
+    .btn-register {
+      background: #007bff;
+      color: #fff !important;
+    }
+
+    /* --- Products Section --- */
+    .products {
+      padding: 60px 5%;
+      flex: 1;
+    }
+    .products-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .products-container h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .products-subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    /* --- Product Grid --- */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+      background-color: #eee; /* Placeholder backdrop */
+    }
+    .product-card h3 {
+      font-size: 18px;
+      margin: 15px 0 8px;
+    }
+    .product-card p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+    .price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: #007bff;
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: #0056b3;
+    }
+
+    /* --- Dynamic Modals System --- */
+    .product-modal {
+      display: none; 
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0; width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .product-modal.show-modal {
+      display: flex;
+    }
+    .product-modal-content {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 600px;
+      width: 90%;
+      position: relative;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    }
+    .close-popup-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 32px;
+      cursor: pointer;
+      color: #aaa;
+    }
+    .close-popup-btn:hover {
+      color: #333;
+    }
+    .modal-body {
+      display: flex;
+      gap: 25px;
+      margin-top: 15px;
+    }
+    .modal-img {
+      width: 45%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 6px;
+      background-color: #eee;
+    }
+    .modal-info {
+      width: 55%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .modal-price {
+      font-size: 22px;
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    /* Responsive adjustment for popup details */
+    @media (max-width: 600px) {
+      .modal-body { flex-direction: column; }
+      .modal-img, .modal-info { width: 100%; }
+    }
+
+    /* --- Footer --- */
+    .footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Menu Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <a href="#">PrepLearn</a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#myorders">My Orders</a></li>
+      <li><a href="#signin" class="btn-login">Sign In</a></li>
+      <li><a href="#signup" class="btn-register">Register</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Products Catalog Section -->
+  <section id="products" class="products">
+    <div class="products-container">
+      <h2>Popular Stationery</h2>
+      <p class="products-subtitle">Quality supplies for school, college, and university students.</p>
+
+      <div class="product-grid">
+
+        <!-- Product Card 1 -->
+        <div class="product-card">
+          <img src="images/Pen.jpg" alt="Gel Pen">
+          <h3>Erasable Gel Pen</h3>
+          <p>Smooth writing, long-lasting ink, and easily erasable.</p>
+          <span class="price">Rp 15.000</span>
+          <a href="#" class="btn btn-primary open-popup-btn" data-popup="pen-modal">View Product</a>
+        </div>
+
+        <!-- Product Card 2 -->
+        <div class="product-card">
+          <img src="images/Notebooks.jpg" alt="A5 Notebook">
+          <h3>Premium A5 Notebook</h3>
+          <p>Perfect grid configuration for lectures and clean study notes.</p>
+          <span class="price">Rp 45.300</span>
+          <a href="#" class="btn btn-primary open-popup-btn" data-popup="notebook-modal">View Product</a>
+        </div>
+
+        <!-- Product Card 3 -->
+        <div class="product-card">
+          <img src="images/Highlighter.jpg" alt="Highlighter Set">
+          <h3>Pastel Highlighter Set</h3>
+          <p>Highlight key textbook concepts without causing any eye strain.</p>
+          <span class="price">Rp 34.500</span>
+          <a href="#" class="btn btn-primary open-popup-btn" data-popup="highlighter-modal">View Product</a>
+        </div>
+
+        <!-- Product Card 4 -->
+        <div class="product-card">
+          <img src="images/Mechanical-pencil.jpg" alt="Mechanical Pencil">
+          <h3>Mechanical Pencil</h3>
+          <p>Precise writing core engineered for mathematics and drafting.</p>
+          <span class="price">Rp 15.000</span>
+          <a href="#" class="btn btn-primary open-popup-btn" data-popup="pencil-modal">View Product</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== -->
+  <!-- MODAL STORAGE VAULT (Safely separated outside grid context) -->
+  <!-- ====================================================== -->
+
+  <!-- Modal 1: Erasable Gel Pen -->
+  <div id="pen-modal" class="product-modal">
+    <div class="product-modal-content">
+      <span class="close-popup-btn">&times;</span>
+      <div class="modal-body">
+        <img src="images/Pen.jpg" alt="Gel Pen" class="modal-img">
+        <div class="modal-info">
+          <h2>Erasable Gel Pen</h2>
+          <p class="modal-price">Rp 15.000</p>
+          <p><strong>Description:</strong> High quality ink system that erases fully cleanly without damaging thin book paper sheets.</p>
+          <p><strong>Variations:</strong> Blue / Black Ink</p>
+          <button class="btn btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Premium A5 Notebook -->
+  <div id="notebook-modal" class="product-modal">
+    <div class="product-modal-content">
+      <span class="close-popup-btn">&times;</span>
+      <div class="modal-body">
+        <img src="images/Notebooks.jpg" alt="A5 Notebook" class="modal-img">
+        <div class="modal-info">
+          <h2>Premium A5 Notebook</h2>
+          <p class="modal-price">Rp 45.300</p>
+          <p><strong>Description:</strong> Thick bleedproof sheets featuring layout spacing ideal for journaling or structured learning notes.</p>
+          <p><strong>Pages:</strong> 120 Sheets Grid</p>
+          <button class="btn btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Pastel Highlighter Set -->
+  <div id="highlighter-modal" class="product-modal">
+    <div class="product-modal-content">
+      <span class="close-popup-btn">&times;</span>
+      <div class="modal-body">
+        <img src="images/Highlighter.jpg" alt="Highlighter Set" class="modal-img">
+        <div class="modal-info">
+          <h2>Pastel Highlighter Set</h2>
+          <p class="modal-price">Rp 34.500</p>
+          <p><strong>Description:</strong> Chisel tip marker assortment offering calm, subtle hues that keep your pages cleanly categorized.</p>
+          <p><strong>Includes:</strong> 6 Unique Tones</p>
+          <button class="btn btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Mechanical Pencil -->
+  <div id="pencil-modal" class="product-modal">
+    <div class="product-modal-content">
+      <span class="close-popup-btn">&times;</span>
+      <div class="modal-body">
+        <img src="images/Mechanical-pencil.jpg" alt="Mechanical Pencil" class="modal-img">
+        <div class="modal-info">
+          <h2>Mechanical Pencil</h2>
+          <p class="modal-price">Rp 15.000</p>
+          <p><strong>Description:</strong> Superior drafting pencil, easily identify your lead type with the built-in lead hardness indicator.</p>
+          <p><strong>Includes:</strong> Hardness indicator</p>
+          <button class="btn btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

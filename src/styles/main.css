@@ -43,6 +43,19 @@ body {
   transition: color 0.3s ease;
 }
 
+.btn-register {
+  background-color: #2563eb;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-signup:hover {
+  background-color: #1d4ed8;
+}
+
 .nav-links a:hover, 
 .nav-links a.active {
   color: #00adb5;

@@ -16,13 +16,6 @@ function addToCart(id, name, price) {
     cart.push({ id, name, price, quantity: 1 });
   }
 
-  // Save updated cart to localStorage
-  localStorage.setItem('shoppingCart', JSON.stringify(cart));
-  
-  // Refresh the counter on screen
-  updateCartUI();
-}
-
 function updateCartUI() {
   // Calculate total number of pieces in cart
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);

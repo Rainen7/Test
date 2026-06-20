@@ -30,3 +30,26 @@ function updateCartUI() {
   // Update the HTML text
   document.getElementById('cart-count').innerText = totalItems;
 }
+
+function removeFromCart(id) {
+  // Find the index of the item in the cart array
+  const itemIndex = cart.findIndex(item => item.id === id);
+
+  if (itemIndex !== -1) {
+    // Decrease the quantity
+    cart[itemIndex].quantity -= 1;
+
+    // If quantity reaches 0, remove the item entirely from the array
+    if (cart[itemIndex].quantity <= 0) {
+      cart.splice(itemIndex, 1);
+    }
+  }
+
+  // Save the updated cart to localStorage
+  localStorage.setItem('shoppingCart', JSON.stringify(cart));
+  
+  // Refresh the UI to update counts and displays
+  updateCartUI();
+  
+  // Optional: If you have a cart dropdown drawer, re-render it here
+  if (typeof renderCartDrawer === "function") renderCartDrawer();

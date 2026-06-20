@@ -249,6 +249,29 @@ body {
   color: #ffffff;
   padding: 1.5rem;
 }
+
+.remove-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #ef4444; /* Modern crimson red */
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 0.5rem; /* Spacing next to the Add button */
+}
+
+.remove-btn:hover {
+  background-color: #dc2626; /* Darker red */
+  transform: translateY(-2px);
+}
+
+.remove-btn:active {
+  background-color: #b91c1c;
+  transform: translateY(0);
+}
 /* Dark background overlay masking the page */
 .product-modal {
   display: none; 

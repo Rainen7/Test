@@ -40,9 +40,7 @@ function removeFromCart(id) {
 
   // Save the updated cart to localStorage
   localStorage.setItem('shoppingCart', JSON.stringify(cart));
+}
   
   // Refresh the UI to update counts and displays
   updateCartUI();
-  
-  // Optional: If you have a cart dropdown drawer, re-render it here
-  if (typeof renderCartDrawer === "function") renderCartDrawer();
